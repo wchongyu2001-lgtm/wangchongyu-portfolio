@@ -523,6 +523,19 @@ button:focus-visible {
   margin-top: 2px;
 }
 
+/* ---------- about ---------- */
+
+.about-body {
+  max-width: 68ch;
+}
+
+.about-body p {
+  font-size: var(--fs-m);
+  line-height: 1.7;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+}
+
 /* ---------- experience ---------- */
 
 .xp-item {

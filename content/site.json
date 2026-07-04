@@ -1,24 +1,32 @@
 {
   "name": "Wang Chongyu",
-  "role": "AI-native finance operator",
-  "tagline": "I build the AI systems most teams only talk about.",
-  "intro": "Finance & Strategy undergraduate at Singapore Management University. Founder of a licensed employment agency. I design and ship LLM-powered systems that run real workflows — fund due-diligence pipelines, an AI asset-management desk on institutional data, and the operations of my own company.",
+  "role": "Finance & Strategy @ SMU · Distribution Analyst @ Conduit Group",
+  "tagline": "Analyst by training, builder by instinct.",
+  "intro": "Finance & Strategy undergraduate at Singapore Management University and Distribution Analyst intern at Conduit Group. I do the work first — fund due diligence, LP analytics, valuation — then build the systems that make it reproducible: 34 tearsheets across 8 alternative-asset sectors, a 5,146-contact LP engine, and an automated equity-research desk that briefs me every morning.",
   "location": "Singapore",
   "availability": "Seeking internships in asset management, fund distribution, investment research, and strategy consulting.",
+  "about": {
+    "kicker": "About",
+    "heading": "I can't leave a manual process alone.",
+    "body": [
+      "At my internship I did the fund triage by hand once — then built the pipeline that turns a raw fund PDF into a rated, documented shelf decision. That pattern runs through everything here. I founded a licensed employment agency the same year I started university, then automated its compliance paperwork. I wanted to genuinely understand markets, so I built an equity-research desk that produces valuation work and morning briefs on a schedule. I wanted to learn faster, so I built a system that turns what I read into spaced-repetition reviews.",
+      "What drives me is straightforward: I'm obsessive about getting better — at analysis, at building, at the craft of whatever is in front of me — and I don't wait to be told to start. Every system on this page exists because I refused to do the same work twice. Put me on a team with real problems and I bring the same habit: learn it properly, do it well, then make it faster for everyone."
+    ]
+  },
   "contact": {
     "email": "cy.wang.2024@business.smu.edu.sg",
     "linkedin": "https://www.linkedin.com/in/wangchongyu/"
   },
   "resumePath": "/resume.pdf",
   "seo": {
-    "title": "Wang Chongyu — AI-native finance operator",
-    "description": "SMU Finance & Strategy student who builds production LLM systems: fund due-diligence pipelines, an AI asset-management desk on WRDS data, and automation running a real employment agency. Seeking asset management, distribution, and consulting internships.",
-    "keywords": ["asset management", "fund distribution", "investor relations", "due diligence", "valuation", "equity research", "LLM automation", "agentic workflows", "Claude Code", "Python", "financial modelling", "SMU", "Singapore", "internship"]
+    "title": "Wang Chongyu — Finance & Strategy, SMU · Distribution Analyst",
+    "description": "SMU Finance & Strategy undergraduate and Conduit Group distribution analyst. 34 fund tearsheets across 8 alternative-asset sectors, a 5,146-contact LP engine, an automated equity-research desk — and a licensed agency I founded and run. Seeking asset management, fund distribution, and strategy internships.",
+    "keywords": ["asset management", "fund distribution", "investor relations", "due diligence", "valuation", "equity research", "financial analysis", "LLM automation", "Python", "Excel modelling", "SMU", "Singapore", "internship"]
   },
   "stats": [
-    { "value": "20+", "label": "AI systems shipped and running" },
-    { "value": "50+", "label": "work-pass placements at my own agency" },
-    { "value": "34", "label": "fund tearsheets delivered at Conduit" },
-    { "value": "30+", "label": "custom agent skills in daily use" }
+    { "value": "34", "label": "fund tearsheets shipped at Conduit" },
+    { "value": "17", "label": "managers processed across 8 alternative-asset sectors" },
+    { "value": "5,146", "label": "LP contacts in the tiering engine I rebuilt" },
+    { "value": "50+", "label": "work-pass placements at the agency I founded" }
   ]
 }

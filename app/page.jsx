@@ -20,9 +20,9 @@ export default function Home() {
             </p>
           </div>
           <h1 className="display">
-            I build the AI systems
+            Analyst by training,
             <br />
-            most teams <em>only talk about.</em>
+            <em>builder by instinct.</em>
           </h1>
           <div className="hero-below">
             <div>
@@ -143,6 +143,20 @@ export default function Home() {
                 <strong>{a.title}</strong>
                 <span>{a.note}</span>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section wrap" id="about">
+          <div className="section-head">
+            <div>
+              <p className="kicker">{site.about.kicker}</p>
+              <h2>{site.about.heading}</h2>
+            </div>
+          </div>
+          <div className="about-body">
+            {site.about.body.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
         </section>

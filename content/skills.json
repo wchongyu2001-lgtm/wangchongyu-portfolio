@@ -2,7 +2,7 @@
   "groups": [
     {
       "label": "Finance",
-      "items": ["Valuation (DCF, comps)", "Equity research workflow", "Fund due diligence", "Portfolio & risk memos", "Backtesting discipline", "Excel (Solver, PivotTables)"]
+      "items": ["Valuation (DCF, comps)", "Fund due diligence & tearsheets", "LP prospect analytics", "Equity research workflow", "Portfolio & risk memos", "Backtesting discipline", "Excel (Solver, PivotTables)"]
     },
     {
       "label": "AI systems",

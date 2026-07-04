@@ -1,35 +1,34 @@
 {
-  "slug": "wang-desk",
-  "kicker": "Flagship project",
-  "title": "Wang Desk — a personal AI asset-management firm",
-  "subtitle": "A four-surface portfolio-manager terminal run by a team of AI agents: analysts, a PM, a risk officer, and a scout — producing daily research on my own capital.",
-  "summary": "What started as a markets dashboard became a full AI asset-management desk. A team of role-based agents — Analyst, Portfolio Manager, Risk Officer, Idea Scout, Macro Strategist, Distribution Analyst — write dated research memos on every holding, on a schedule, with no human in the loop. The desk runs on institutional-grade data, applies a DCF + comparables valuation engine to every name, back-tests strategies in a lookahead-safe engine, and publishes to a self-hosted terminal I read every morning.",
+  "slug": "fund-distribution-pipeline",
+  "kicker": "Flagship work",
+  "title": "The fund due-diligence & distribution pipeline",
+  "subtitle": "At Conduit Group I turned raw alternative-asset fund PDFs into rated, documented shelf decisions — replacing manual triage for the investor-relations team.",
+  "summary": "Fund selection used to mean reading hundred-page PDFs by hand. I designed a pipeline that pairs LLM extraction with a 7-factor scoring framework, converting each raw fund document into a 14-section workbook with a composite rating, an A/B/C/Pass shelf verdict, and a client-ready factsheet. It made the team's triage reproducible — same inputs, same verdict, documented reasoning.",
   "sections": [
     {
-      "heading": "The agent team",
-      "body": "Seven specialised agent roles cover the investment process end-to-end: per-holding Analyst briefs, weekly PM memos, risk and concentration reports, thematic idea scouting with ranked watchlists, daily macro briefings filtered to the book, ETF/fund shelf evaluations, and a four-persona Investment Committee that debates and votes on each new growth-stock candidate before it enters the ledger. Every memo is dated, filed, and read against kill-criteria written into each thesis."
+      "heading": "From PDF to verdict",
+      "body": "LLM extraction pulls strategy, terms, track record, and risk data out of raw fund documents; a 7-factor scoring framework turns it into a 14-section due-diligence workbook with a composite rating and an A/B/C/Pass shelf verdict the IR team can defend."
     },
     {
-      "heading": "Institutional data & valuation",
-      "body": "Market data flows from Yahoo and FRED with a deep-history backfill from WRDS (Wharton Research Data Services) as ground truth on conflicts. A valuation engine computes DCF and comparables-based fair value for every holding. Kill-criteria breaches, position P&L, and thesis drift surface as flags on the cockpit overview."
+      "heading": "Coverage at intern speed",
+      "body": "Processed ~17 fund managers across 8 alternative-asset sectors — hedge funds, private equity, real estate, VC, quant, private debt, digital assets — shipping 34 manager- and sub-fund-level tearsheets plus outbound IR emails and investment commentary."
     },
     {
-      "heading": "Strategy Lab",
-      "body": "A lookahead-safe backtesting engine with walk-forward out-of-sample validation and crisis stress-testing, built to evaluate strategy archetypes on their honest merits — every backtest treated as guilty until proven innocent."
+      "heading": "The LP engine",
+      "body": "Rebuilt the firm's 5,146-contact LP database as v2.0: LLM-driven matching ranks every contact into Tier 1/2/3 prospect bands for each new fund, and the whole thing is queryable in natural language instead of by manual row-scanning."
     },
     {
-      "heading": "Fully automated operations",
-      "body": "Daily news and macro briefs generate via CI at market open; the agent team review runs each morning on a scheduler; an idea loop scouts and gates new pitches six times a day. The terminal deploys to a self-hosted server via CI/CD on every push, with a news feed integrated from my separate email-assistant system."
+      "heading": "Workflow leverage",
+      "body": "Shipped the supporting tools the team now runs on — automated HTML email broadcasts through Monday CRM, LLM-driven web scraping to enrich the company database, and scripted automations across recurring processes."
     }
   ],
   "highlights": [
-    "7 role-based agent skills producing dated, filed investment memos on a schedule",
-    "WRDS institutional data pipeline with cross-source integrity checks",
-    "DCF + comps valuation engine over every holding",
-    "Lookahead-safe backtester with walk-forward OOS and crisis stress",
-    "4-persona AI Investment Committee that votes before a name enters the book",
-    "Zero-touch daily operation: CI briefs, scheduled team reviews, auto-deploy"
+    "14-section due-diligence workbook with composite rating and A/B/C/Pass shelf verdict",
+    "34 tearsheets across ~17 managers and 8 alternative-asset sectors",
+    "5,146-contact LP database with Tier 1/2/3 prospect matching, queryable in natural language",
+    "Outbound IR emails and investment commentary drafted alongside the analysis",
+    "Manual triage replaced with a reproducible, documented process"
   ],
-  "stack": ["Python", "Flask", "Claude (headless agents)", "WRDS", "FRED", "GitHub Actions CI", "Docker", "nginx", "self-hosted VPS"],
-  "tags": ["Asset management", "Equity research", "Valuation", "Agentic AI"]
+  "stack": ["LLM extraction", "7-factor scoring framework", "Excel", "Monday CRM", "Python"],
+  "tags": ["Fund distribution", "Due diligence", "Investor relations"]
 }
