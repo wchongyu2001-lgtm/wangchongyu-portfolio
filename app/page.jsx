@@ -7,6 +7,16 @@ import experience from '@/content/experience.json';
 import skills from '@/content/skills.json';
 import archive from '@/content/archive.json';
 
+const MARQUEE = [
+  'Fund due diligence', 'Valuation', 'LP analytics', 'Equity research',
+  'LLM automation', 'Founder', 'Excel modelling', 'Python', 'Agentic systems',
+];
+
+function splitStat(value) {
+  const m = value.match(/^([\d,.]+)(.*)$/);
+  return m ? { num: m[1], suffix: m[2] } : { num: value, suffix: '' };
+}
+
 export default function Home() {
   return (
     <>
@@ -20,9 +30,8 @@ export default function Home() {
             </p>
           </div>
           <h1 className="display">
-            Analyst by training,
-            <br />
-            <em>builder by instinct.</em>
+            <span className="line"><span>Analyst by training,</span></span>
+            <span className="line"><span><em>builder by instinct.</em></span></span>
           </h1>
           <div className="hero-below">
             <div>
@@ -59,29 +68,46 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="stats">
-          <div className="wrap stats-grid">
-            {site.stats.map((s) => (
-              <div className="stat" key={s.label}>
-                <div className="num">{s.value}</div>
-                <div className="cap">{s.label}</div>
-              </div>
+        <div className="marquee" aria-hidden="true">
+          <div className="marquee-track">
+            {[0, 1].map((rep) => (
+              <span key={rep}>
+                {MARQUEE.map((w) => (
+                  <span className="marquee-item" key={w + rep}>
+                    {w} <i>✦</i>
+                  </span>
+                ))}
+              </span>
             ))}
+          </div>
+        </div>
+
+        <section className="stats" data-reveal>
+          <div className="wrap stats-grid">
+            {site.stats.map((s) => {
+              const { num, suffix } = splitStat(s.value);
+              return (
+                <div className="stat" key={s.label}>
+                  <div className="num" data-count={num} data-suffix={suffix}>
+                    {s.value}
+                  </div>
+                  <div className="cap">{s.label}</div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
-        <section className="section wrap" id="work">
-          <div className="section-head">
-            <div>
-              <p className="kicker">{flagship.kicker} — 01</p>
-              <h2>The centrepiece</h2>
+        <section className="flagship-band" id="work">
+          <div className="wrap" data-reveal>
+            <div className="section-head">
+              <div>
+                <p className="kicker">{flagship.kicker} — 01</p>
+              </div>
+              <p className="kicker dim">{flagship.tags.join(' · ')}</p>
             </div>
-          </div>
-          <article className="flagship">
-            <p className="kicker">{flagship.tags.join(' · ')}</p>
-            <h3 className="display">{flagship.title}</h3>
-            <p className="sub">{flagship.subtitle}</p>
-            <p className="summary">{flagship.summary}</p>
+            <h2 className="display flagship-title">{flagship.title}</h2>
+            <p className="flagship-sub">{flagship.subtitle}</p>
             <div className="flagship-grid">
               {flagship.sections.map((sec) => (
                 <div className="flagship-cell" key={sec.heading}>
@@ -90,54 +116,61 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <ul className="flagship-highlights">
-              {flagship.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-            <div className="stack-row">
-              {flagship.stack.map((t) => (
-                <span className="tag" key={t}>
-                  {t}
-                </span>
-              ))}
+            <div className="flagship-foot">
+              <ul className="flagship-highlights">
+                {flagship.highlights.slice(0, 3).map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
+              <div className="stack-row">
+                {flagship.stack.map((t) => (
+                  <span className="tag on-dark" key={t}>
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
-          </article>
+          </div>
         </section>
 
         <section className="section wrap">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <div>
               <p className="kicker">Case studies — 02–0{projects.length + 1}</p>
               <h2>Selected work</h2>
             </div>
+            <p className="kicker dim">Hover to open</p>
           </div>
-          <div>
+          <div className="case-index">
             {projects.map((p, i) => (
-              <Link href={`/projects/${p.slug}/`} className="case-row" key={p.slug}>
+              <Link href={`/projects/${p.slug}/`} className="case-row" key={p.slug} data-reveal>
                 <span className="case-num">0{i + 2}</span>
-                <div>
-                  <h3>{p.title}</h3>
+                <div className="case-main">
+                  <h3 className="display">{p.title}</h3>
                   <p className="case-context">{p.context}</p>
+                  <div className="case-more">
+                    <div>
+                      <p className="case-summary">{p.summary}</p>
+                      <p className="case-focus">{p.tags.join(' · ')}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="case-right">
-                  <p>{p.summary}</p>
-                  <p className="case-focus">{p.tags.join(' · ')}</p>
-                  <span className="link-arrow">Read case study →</span>
-                </div>
+                <span className="case-arrow" aria-hidden="true">
+                  →
+                </span>
               </Link>
             ))}
           </div>
         </section>
 
         <section className="section wrap">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <div>
               <p className="kicker">Also built</p>
               <h2>The wider workshop</h2>
             </div>
           </div>
-          <div className="archive-grid">
+          <div className="archive-grid" data-reveal>
             {archive.map((a) => (
               <div className="archive-item" key={a.title}>
                 <strong>{a.title}</strong>
@@ -148,21 +181,23 @@ export default function Home() {
         </section>
 
         <section className="section wrap" id="about">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <div>
               <p className="kicker">{site.about.kicker}</p>
               <h2>{site.about.heading}</h2>
             </div>
           </div>
-          <div className="about-body">
-            {site.about.body.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
+          <div className="about-body" data-reveal>
+            {site.about.body.map((p, i) => (
+              <p key={p.slice(0, 24)} className={i === 0 ? 'about-lead' : ''}>
+                {p}
+              </p>
             ))}
           </div>
         </section>
 
         <section className="section wrap" id="experience">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <div>
               <p className="kicker">Experience</p>
               <h2>Where I&rsquo;ve worked</h2>
@@ -170,7 +205,7 @@ export default function Home() {
           </div>
           <div>
             {experience.experience.map((x) => (
-              <div className="xp-item" key={x.org}>
+              <div className="xp-item" key={x.org} data-reveal>
                 <div>
                   <h3>{x.org}</h3>
                   <p className="xp-role">{x.role}</p>
@@ -187,13 +222,13 @@ export default function Home() {
         </section>
 
         <section className="section wrap">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <div>
               <p className="kicker">Toolbox</p>
               <h2>What I work with</h2>
             </div>
           </div>
-          <div className="skills-grid">
+          <div className="skills-grid" data-reveal>
             {skills.groups.map((g) => (
               <div className="skills-col" key={g.label}>
                 <h3>{g.label}</h3>
@@ -208,13 +243,13 @@ export default function Home() {
         </section>
 
         <section className="section wrap">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <div>
               <p className="kicker">Education &amp; community</p>
               <h2>Background</h2>
             </div>
           </div>
-          <div className="edu-grid">
+          <div className="edu-grid" data-reveal>
             <div>
               {experience.education.map((e) => (
                 <div className="xp-item" key={e.org} style={{ gridTemplateColumns: '1fr' }}>
@@ -249,21 +284,19 @@ export default function Home() {
         </section>
 
         <section className="contact" id="contact">
-          <div className="wrap">
+          <div className="wrap" data-reveal>
             <p className="kicker">Contact</p>
-            <h2>
-              Hiring for asset management,
-              <br />
-              distribution, or strategy?
+            <h2 className="display">
+              Let&rsquo;s talk<em>.</em>
             </h2>
-            <p>
-              I bring the analyst toolkit and the AI leverage to go with it. Email me, or find me
-              on LinkedIn — the résumé has the one-page version.
+            <p className="contact-sub">
+              Hiring for asset management, fund distribution, or strategy? I bring the analyst
+              toolkit and the AI leverage to go with it.
             </p>
+            <a href={`mailto:${site.contact.email}`} className="contact-mail">
+              {site.contact.email}
+            </a>
             <div className="contact-ctas">
-              <a href={`mailto:${site.contact.email}`} className="btn primary">
-                Email me
-              </a>
               <a href={site.contact.linkedin} className="btn" target="_blank" rel="noopener noreferrer">
                 LinkedIn
               </a>
@@ -273,7 +306,7 @@ export default function Home() {
             </div>
             <div className="footer-line">
               <span>© 2026 Wang Chongyu</span>
-              <span>Built with my own AI toolchain</span>
+              <span>Designed &amp; built with my own AI toolchain</span>
             </div>
           </div>
         </section>

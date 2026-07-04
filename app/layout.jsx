@@ -1,6 +1,7 @@
 import './globals.css';
 import { Newsreader, Inter, IBM_Plex_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import Dynamics from '@/components/Dynamics';
 import site from '@/content/site.json';
 
 const newsreader = Newsreader({
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${newsreader.variable} ${inter.variable} ${plexMono.variable}`}>
       <body>
+        <Dynamics />
         {children}
         <Analytics />
       </body>
