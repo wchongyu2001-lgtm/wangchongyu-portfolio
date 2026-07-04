@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "label": "Finance",
+      "items": ["Valuation (DCF, comps)", "Equity research workflow", "Fund due diligence", "Portfolio & risk memos", "Backtesting discipline", "Excel (Solver, PivotTables)"]
+    },
+    {
+      "label": "AI systems",
+      "items": ["Claude Code & headless agents", "Multi-agent orchestration", "MCP servers (built my own)", "Custom skill design (30+)", "LLM extraction & scoring pipelines", "Prompt & context engineering"]
+    },
+    {
+      "label": "Engineering",
+      "items": ["Python", "JavaScript/Node", "Flask & stdlib servers", "Google Sheets/Gmail APIs", "Playwright automation", "Docker, nginx, systemd/launchd", "GitHub Actions CI/CD", "Self-hosted VPS ops"]
+    },
+    {
+      "label": "Business",
+      "items": ["Founded & run a licensed agency", "Client management (20+ B2B, 90% retention)", "Regulatory compliance ops", "Monday CRM", "Digital marketing", "Mandarin Chinese (fluent)"]
+    }
+  ]
+}

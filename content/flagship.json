@@ -1,0 +1,35 @@
+{
+  "slug": "wang-desk",
+  "kicker": "Flagship project",
+  "title": "Wang Desk — a personal AI asset-management firm",
+  "subtitle": "A four-surface portfolio-manager terminal run by a team of AI agents: analysts, a PM, a risk officer, and a scout — producing daily research on my own capital.",
+  "summary": "What started as a markets dashboard became a full AI asset-management desk. A team of role-based agents — Analyst, Portfolio Manager, Risk Officer, Idea Scout, Macro Strategist, Distribution Analyst — write dated research memos on every holding, on a schedule, with no human in the loop. The desk runs on institutional-grade data, applies a DCF + comparables valuation engine to every name, back-tests strategies in a lookahead-safe engine, and publishes to a self-hosted terminal I read every morning.",
+  "sections": [
+    {
+      "heading": "The agent team",
+      "body": "Seven specialised agent roles cover the investment process end-to-end: per-holding Analyst briefs, weekly PM memos, risk and concentration reports, thematic idea scouting with ranked watchlists, daily macro briefings filtered to the book, ETF/fund shelf evaluations, and a four-persona Investment Committee that debates and votes on each new growth-stock candidate before it enters the ledger. Every memo is dated, filed, and read against kill-criteria written into each thesis."
+    },
+    {
+      "heading": "Institutional data & valuation",
+      "body": "Market data flows from Yahoo and FRED with a deep-history backfill from WRDS (Wharton Research Data Services) as ground truth on conflicts. A valuation engine computes DCF and comparables-based fair value for every holding. Kill-criteria breaches, position P&L, and thesis drift surface as flags on the cockpit overview."
+    },
+    {
+      "heading": "Strategy Lab",
+      "body": "A lookahead-safe backtesting engine with walk-forward out-of-sample validation and crisis stress-testing, built to evaluate strategy archetypes on their honest merits — every backtest treated as guilty until proven innocent."
+    },
+    {
+      "heading": "Fully automated operations",
+      "body": "Daily news and macro briefs generate via CI at market open; the agent team review runs each morning on a scheduler; an idea loop scouts and gates new pitches six times a day. The terminal deploys to a self-hosted server via CI/CD on every push, with a news feed integrated from my separate email-assistant system."
+    }
+  ],
+  "highlights": [
+    "7 role-based agent skills producing dated, filed investment memos on a schedule",
+    "WRDS institutional data pipeline with cross-source integrity checks",
+    "DCF + comps valuation engine over every holding",
+    "Lookahead-safe backtester with walk-forward OOS and crisis stress",
+    "4-persona AI Investment Committee that votes before a name enters the book",
+    "Zero-touch daily operation: CI briefs, scheduled team reviews, auto-deploy"
+  ],
+  "stack": ["Python", "Flask", "Claude (headless agents)", "WRDS", "FRED", "GitHub Actions CI", "Docker", "nginx", "self-hosted VPS"],
+  "tags": ["Asset management", "Equity research", "Valuation", "Agentic AI"]
+}

@@ -1,0 +1,14 @@
+[
+  { "title": "Kith", "note": "A warm, installable guestbook PWA for friends — production on Vercel" },
+  { "title": "Trips", "note": "Wanderlog-style itinerary planner with self-hosted cross-device sync" },
+  { "title": "Insurance Planner", "note": "Interactive coverage planner with an embedded AI advisor chat" },
+  { "title": "AI Build Studio", "note": "Local two-pane app that plans software in chat and kicks off coding sessions" },
+  { "title": "Deep-research harness", "note": "Parallel search agents with adversarial claim verification and cited reports" },
+  { "title": "CPF audit suite", "note": "Bilingual regulatory audit workbooks generated from ID photos and filings" },
+  { "title": "Personal Learnings", "note": "Auto-published dashboard of every deep-research dossier I keep" },
+  { "title": "Clawdmeter", "note": "Token-usage telemetry pipeline for my AI fleet" },
+  { "title": "Knowledge graphs", "note": "Any codebase or document set turned into a queryable graph (graphify)" },
+  { "title": "Workshop (n8n)", "note": "Self-hosted automation hub wiring Telegram to AI routers" },
+  { "title": "Design system", "note": "A tokenised personal house style propagated across every dashboard" },
+  { "title": "Front-End Sourcebook", "note": "A 28-site study of what makes web design good or bad in 2026" }
+]

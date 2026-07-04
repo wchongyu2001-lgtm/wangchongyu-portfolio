@@ -1,0 +1,65 @@
+{
+  "experience": [
+    {
+      "org": "Conduit Group",
+      "role": "Distribution Analyst Intern",
+      "period": "Jan 2026 — Present",
+      "bullets": [
+        "Designed a distribution pipeline pairing LLM extraction with a 7-factor scoring framework, converting raw fund PDFs into a 14-section workbook with composite rating, A/B/C/Pass shelf verdict, and factsheet — replacing manual triage with reproducible insights for the IR team.",
+        "Processed ~17 fund managers across 8 alternative-asset sectors, shipping 34 manager- and sub-fund-level tearsheets and drafting outbound IR emails and investment commentary.",
+        "Shipped v2.0 of the firm's 5,146-contact LP database — LLM-driven matching ranks contacts into Tier 1/2/3 prospect bands per new fund, queryable in natural language.",
+        "Built supporting tools the team now runs on: automated HTML email broadcasts via Monday, LLM-driven web scraping for database enrichment, and scripted automations across recurring processes."
+      ]
+    },
+    {
+      "org": "Smile Employment Agency",
+      "role": "Founder",
+      "period": "Apr 2024 — Present",
+      "bullets": [
+        "Founded and manage a licensed Singapore employment agency (UEN 24C2161) specialising in service-sector manpower placements.",
+        "Achieved 50+ S Pass and Work Permit placements within the first 8 months, outperforming industry averages through workflow automation, document standardisation, and proactive compliance tracking.",
+        "Maintain a client base of 20+ corporate partners at a 90% retention rate; every placement completed within 10 working days."
+      ]
+    },
+    {
+      "org": "Commerce.sg",
+      "role": "Business Development Executive",
+      "period": "May 2024 — Aug 2025",
+      "bullets": [
+        "Identified B2B prospects and partnerships in the social-commerce space; campaigns generated US$100,000+ in attributed client revenue.",
+        "Tailored influencer and content strategies to client-specific audiences to boost reach and brand recall."
+      ]
+    },
+    {
+      "org": "New V Spa",
+      "role": "Marketing Operations Intern",
+      "period": "Sep 2022 — Feb 2023",
+      "bullets": [
+        "Owned social-media strategy across Facebook, Instagram, and TikTok; produced short-form videos reaching 100K+ organic views."
+      ]
+    }
+  ],
+  "community": [
+    {
+      "org": "SMU Project Smile Manila XV",
+      "role": "Project Lead",
+      "period": "Jan 2024 — Present",
+      "bullets": [
+        "Lead a 24-member SMU team for an overseas community service project with CRIBS Foundation (Philippines), shifting the project from short-term aid to long-term sustainability through financial-literacy workshops and corporate-partnership training."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "org": "Singapore Management University",
+      "credential": "BBM, Double Major in Finance and Strategy",
+      "period": "Aug 2024 — Aug 2027",
+      "note": "GPA 3.7/4.0"
+    },
+    {
+      "org": "Ngee Ann Polytechnic",
+      "credential": "Diploma in International Trade and Business",
+      "period": "Jan 2019 — Dec 2022"
+    }
+  ]
+}

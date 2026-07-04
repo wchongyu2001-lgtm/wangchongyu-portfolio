@@ -1,0 +1,107 @@
+[
+  {
+    "slug": "fund-distribution-pipeline",
+    "title": "Fund due-diligence & distribution pipeline",
+    "context": "Conduit Group — Distribution Analyst Intern",
+    "summary": "An LLM-powered pipeline that converts raw alternative-asset fund PDFs into a 14-section due-diligence workbook with a 7-factor composite rating and an A/B/C/Pass shelf verdict — replacing manual triage for the investor-relations team.",
+    "highlights": [
+      "Processed ~17 fund managers across 8 alternative-asset sectors: hedge funds, private equity, real estate, VC, quant, private debt, digital assets",
+      "Shipped 34 manager- and sub-fund-level tearsheets plus outbound IR emails and investment commentary",
+      "Rebuilt the firm's 5,146-contact LP database: LLM-driven matching ranks contacts into Tier 1/2/3 prospect bands per new fund, queryable in natural language",
+      "Shipped supporting automations: HTML email broadcasts via Monday CRM, LLM web-scraping for database enrichment, scripted recurring processes"
+    ],
+    "impact": "Manual fund triage became a reproducible, rated, documented process.",
+    "stack": ["LLM extraction", "7-factor scoring framework", "Excel", "Monday CRM", "Python"],
+    "tags": ["Fund distribution", "Due diligence", "Investor relations"]
+  },
+  {
+    "slug": "worker-master",
+    "title": "Worker Master — running a real agency on AI ops",
+    "context": "Smile Employment Agency — my own licensed company",
+    "summary": "The operations platform behind my employment agency: a spreadsheet-backed workforce system with a mobile app, per-company quota calculators, and AI-driven compliance audits — supporting 50+ work-pass placements and 20+ corporate clients.",
+    "highlights": [
+      "Google Sheets as the system of record, with a mobile web app for viewing and editing worker records from anywhere, 24/7 on a self-hosted server",
+      "Per-company work-pass quota calculator built into the companies view",
+      "AI compliance suite: NRIC-photo intake, bilingual (中文/English) ghost-worker audit workbooks, cross-shop double-submission detection, and an email-scanning blacklist of workers flagged by regulators",
+      "Hourly two-way sync between the cloud sheet and local mirrors, with a health watchdog"
+    ],
+    "impact": "One founder runs compliance-heavy manpower operations that normally need a back-office team.",
+    "stack": ["Python", "Google Sheets API", "Claude (headless)", "launchd schedulers", "self-hosted VPS"],
+    "tags": ["Business operations", "Compliance automation", "Founder"]
+  },
+  {
+    "slug": "budget-bot",
+    "title": "Telegram concierge & mission-control board",
+    "context": "Personal finance + operations assistant",
+    "summary": "A Telegram bot that grew into a personal operations hub: expense tracking with receipt OCR, bank-statement parsing, travel tools, and a worker-edit queue for my agency — audited by a mission-control dashboard that health-checks every feature.",
+    "highlights": [
+      "Natural-language expense logging with OCR receipt reading and bank-statement intake, backed by Google Sheets",
+      "14+ live features tracked on a mission-control board with real-time status pills, an activity feed, and one-click deep-link tests per feature",
+      "A 'build a feature' button that opens a seeded AI coding session pointed at the bot's repo — the bot helps build itself",
+      "Runs 24/7 on a self-hosted server as a systemd service"
+    ],
+    "impact": "A single chat thread replaces an expense app, a document parser, and an ops queue.",
+    "stack": ["Python", "python-telegram-bot", "Google Sheets", "OCR", "Claude (headless)", "systemd"],
+    "tags": ["Agentic AI", "Product thinking", "Automation"]
+  },
+  {
+    "slug": "post-room",
+    "title": "The Post Room — an AI inbox concierge",
+    "context": "Email + learning system over two Gmail accounts",
+    "summary": "A dependency-free Python server plus headless LLM workers that read two Gmail accounts and produce a daily morning brief: grouped newsletter digests, extracted deadlines, plain-English inbox rules, and a finance-news desk with a spaced-repetition concept ledger.",
+    "highlights": [
+      "Custom multi-account Gmail MCP server (read-only OAuth) shared by every feature",
+      "Each smart feature is a small module that shells out to a headless LLM and caches JSON — no database, no framework, no paid API",
+      "Finance Desk turns newsletter flow into a regime board, running threads, and a glossary with spaced-repetition review",
+      "Daily 7am rebuild emails the brief automatically; deadline extraction catches school, billing, and reply-by dates"
+    ],
+    "impact": "Two overflowing inboxes became one five-minute morning brief that also teaches finance.",
+    "stack": ["Python (stdlib only)", "MCP", "Gmail API", "Claude (headless)", "launchd"],
+    "tags": ["Agentic AI", "Systems design", "Finance learning"]
+  },
+  {
+    "slug": "research-pipelines",
+    "title": "Idea Scout & automated research pipelines",
+    "context": "Systematic learning and idea generation",
+    "summary": "A weekly multi-source scout that scans GitHub, Hacker News, Reddit, and YouTube, scores every candidate against a written interests profile, filters through a taste agent, and publishes a ranked digest — alongside a deep-research harness that fans out parallel agents to produce cited reports.",
+    "highlights": [
+      "Multi-source ingestion with per-source adapters (including an RSS workaround for bot-blocked platforms)",
+      "Scoring driven by a plain-markdown interests file — editing the profile retunes the scout with zero code changes",
+      "Deep-research harness: parallel search agents, adversarial claim verification, synthesized cited reports",
+      "Keeper research publishes to a personal learnings dashboard; a 'learn anything' skill turns topics into mastery plans"
+    ],
+    "impact": "A standing research department for one person, on a student budget of $0.",
+    "stack": ["Node.js", "Python", "Claude agents", "RSS/APIs", "launchd"],
+    "tags": ["Research automation", "Multi-agent systems"]
+  },
+  {
+    "slug": "the-desk",
+    "title": "The Desk — a personal cloud of 60+ agents",
+    "context": "The umbrella system tying everything together",
+    "summary": "Every system I build ships to one self-hosted hub on a €5/month server: a dashboard of dashboards with a registry of 60+ agents and automations, health watchdogs driving live status lights, 30+ custom AI skills, and usage telemetry.",
+    "highlights": [
+      "Agent registry tracking ~60 live agents and scheduled jobs across all projects",
+      "A watchdog timer health-checks every service and drives status lights on the hub",
+      "30+ custom skills — from CPF compliance audits to options-trading tutors — invocable from any AI session",
+      "Two-way file sync lets me edit any project's context files from my phone; token-usage telemetry on its own dashboard"
+    ],
+    "impact": "The proof of breadth: one student operating infrastructure that behaves like a small company's internal tooling.",
+    "stack": ["Python", "nginx", "systemd", "launchd", "Docker", "Hetzner VPS"],
+    "tags": ["Infrastructure", "Agent operations", "Self-hosted"]
+  },
+  {
+    "slug": "house-finder",
+    "title": "House Finder — an autonomous housing agent",
+    "context": "Finding my own exchange-semester flat in Dublin",
+    "summary": "An end-to-end autonomous agent for a real personal problem: it scans Dublin housing sources, scores fit against my constraints, sends enquiries as me by email and browser form-fill, and answers landlord replies with an LLM reply-brain — escalating only high-stakes messages for one-click approval.",
+    "highlights": [
+      "100+ enquiries sent autonomously: direct agent emails plus browser-automated listing-site forms",
+      "Reply-brain classifies inbound landlord replies; low-stakes responses send fully automatically, risky ones queue in an approval dashboard",
+      "Hard safety rails: never books, pays, signs, or re-contacts; money/commitment topics always escalate",
+      "Recurring pipeline: daily source refresh, 20-minute reply loop, synced read-only mirror"
+    ],
+    "impact": "A months-long housing search runs itself in the background while I study.",
+    "stack": ["Python", "Playwright", "Gmail API", "Claude (headless)", "launchd"],
+    "tags": ["Autonomous agents", "Real-world task automation"]
+  }
+]
