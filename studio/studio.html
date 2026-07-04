@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Studio — wangchongyu.com</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  :root {
+    --paper:#faf9f7; --paper-2:#f1efea; --line:#e3e0d8; --line-soft:#ebe8e1;
+    --mute:#79766d; --ink-2:#45433c; --ink:#191813;
+    --accent:#1d4a38; --accent-soft:rgba(29,74,56,.07);
+    --mono:'IBM Plex Mono',monospace; --text:'Inter',sans-serif; --display:'Newsreader',serif;
+    --bad:#8a2f2f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--text);font-size:14px;line-height:1.55;height:100vh;display:flex;flex-direction:column}
+  a{color:var(--accent)}
+  button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    padding:9px 14px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+    border-radius:2px;cursor:pointer;transition:all 150ms ease}
+  button:hover{background:var(--ink);color:var(--paper)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  button.primary:hover{background:#163a2c}
+  button:disabled{opacity:.4;cursor:wait}
+  button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:14px 24px;border-bottom:1px solid var(--line);background:var(--paper)}
+  header h1{font-family:var(--display);font-size:19px;font-weight:500}
+  header h1 em{color:var(--accent)}
+  #status{font-family:var(--mono);font-size:11px;color:var(--mute)}
+  #status.dirty{color:var(--bad)}
+
+  main{flex:1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);min-height:0}
+
+  /* left: critic */
+  #critic{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+  #actions{display:flex;gap:8px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line-soft)}
+  #feed{flex:1;overflow-y:auto;padding:20px}
+  .card{border:1px solid var(--line);border-radius:2px;background:#fff;padding:16px 18px;margin-bottom:14px}
+  .card .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  .card h3{font-family:var(--display);font-size:16px;font-weight:500;margin-bottom:6px}
+  .card ul{margin:6px 0 0 16px}
+  .card li{margin-bottom:5px;color:var(--ink-2)}
+  .score{font-family:var(--mono);font-weight:500}
+  .score.good{color:var(--accent)} .score.bad{color:var(--bad)}
+  .msg{margin-bottom:12px}
+  .msg .who{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+  .msg.user .who{color:var(--accent)}
+  .msg p{white-space:pre-wrap;color:var(--ink-2)}
+  .variant{border-left:2px solid var(--line);padding:8px 12px;margin:8px 0;cursor:pointer}
+  .variant:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .variant .k{margin-bottom:4px}
+  #chatbar{display:flex;gap:8px;padding:14px 20px;border-top:1px solid var(--line)}
+  #chatbar textarea{flex:1;font-family:var(--text);font-size:14px;padding:9px 12px;
+    border:1px solid var(--line);border-radius:2px;background:#fff;resize:none;height:42px}
+
+  /* right: editor */
+  #editor{display:flex;flex-direction:column;min-height:0;background:var(--paper-2)}
+  #editor-bar{display:flex;gap:8px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line-soft)}
+  #editor-bar select{font-family:var(--mono);font-size:12px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:2px;background:#fff;color:var(--ink)}
+  #editor-bar .spacer{flex:1}
+  #ta{flex:1;font-family:var(--mono);font-size:12.5px;line-height:1.6;padding:20px;border:0;
+    background:var(--paper-2);color:var(--ink);resize:none;width:100%}
+  #savemsg{font-family:var(--mono);font-size:11px;color:var(--mute)}
+
+  .spin{display:inline-block;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  @media (max-width:900px){main{grid-template-columns:1fr}#editor{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Studio — <em>wangchongyu.com</em></h1>
+  <span id="status">checking…</span>
+  <button class="primary" id="publish">Publish site</button>
+</header>
+<main>
+  <section id="critic">
+    <div id="actions">
+      <button data-job="critique">⌁ Recruiter critique</button>
+      <button data-job="keywords">⌁ ATS keywords</button>
+      <button data-job="fresh">⌁ Freshness audit</button>
+    </div>
+    <div id="feed">
+      <div class="card"><span class="k">The Studio</span>
+        <p>Run a critique, check keyword coverage, audit freshness — or just talk to the critic below.
+        Select text in the editor and hit “3 variants” to rewrite it. Publish runs the sanitize gate
+        before anything goes live.</p></div>
+    </div>
+    <div id="chatbar">
+      <textarea id="chatin" placeholder="Ask the critic anything… (Enter to send)"></textarea>
+      <button id="send">Send</button>
+    </div>
+  </section>
+  <section id="editor">
+    <div id="editor-bar">
+      <select id="file"></select>
+      <button id="variants">3 variants</button>
+      <span class="spacer"></span>
+      <span id="savemsg"></span>
+      <button class="primary" id="save">Save</button>
+    </div>
+    <textarea id="ta" spellcheck="false"></textarea>
+  </section>
+</main>
+<script>
+const $ = (s) => document.querySelector(s);
+const feed = $('#feed');
+let content = {};
+const chat = [];
+
+function card(kicker, html) {
+  const d = document.createElement('div');
+  d.className = 'card';
+  d.innerHTML = `<span class="k">${kicker}</span>${html}`;
+  feed.appendChild(d);
+  feed.scrollTop = feed.scrollHeight;
+  return d;
+}
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const scoreCls = (n, max=10) => n >= max*0.7 ? 'good' : 'bad';
+
+async function api(path, body) {
+  const r = await fetch(path, body ? {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)} : undefined);
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.error || r.status);
+  return d;
+}
+
+async function refreshStatus() {
+  try {
+    const s = await api('/api/status');
+    const dirty = s.git.split('\n').filter(l => /^\s?[MADR?]/.test(l)).length;
+    $('#status').textContent = dirty ? `${dirty} unpublished change(s)` : 'clean · ' + s.git.split('\n').pop();
+    $('#status').className = dirty ? 'dirty' : '';
+  } catch { $('#status').textContent = 'status unavailable'; }
+}
+
+async function loadContent() {
+  content = await api('/api/content');
+  const sel = $('#file');
+  sel.innerHTML = Object.keys(content).map(f => `<option>${f}</option>`).join('');
+  showFile();
+}
+function showFile() { $('#ta').value = JSON.stringify(content[$('#file').value], null, 2); }
+$('#file').addEventListener('change', showFile);
+
+$('#save').addEventListener('click', async () => {
+  try {
+    await api('/api/save', { file: $('#file').value, text: $('#ta').value });
+    content[$('#file').value] = JSON.parse($('#ta').value);
+    $('#savemsg').textContent = 'saved ✓';
+    refreshStatus();
+  } catch (e) { $('#savemsg').textContent = 'error: ' + e.message; }
+  setTimeout(() => $('#savemsg').textContent = '', 4000);
+});
+
+async function runJob(btn, job) {
+  btn.disabled = true;
+  const wait = card(job, '<p><span class="spin">◌</span> thinking… (30–120s)</p>');
+  try {
+    const d = await api('/api/' + job, {});
+    wait.remove();
+    if (job === 'critique') {
+      card('Recruiter critique', `
+        <h3>Overall <span class="score ${scoreCls(d.overall)}">${d.overall}/10</span> — ${esc(d.verdict)}</h3>
+        ${(d.sections||[]).map(s => `<h3 style="margin-top:12px">${esc(s.id)} <span class="score ${scoreCls(s.score)}">${s.score}/10</span></h3>
+          <ul>${(s.issues||[]).map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+          <p style="margin-top:6px"><strong>Fix:</strong> ${esc(s.best_fix)}</p>`).join('')}
+        ${(d.unverified_claims||[]).length ? `<h3 style="margin-top:14px">Unverified claims ⚠</h3><ul>${d.unverified_claims.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` : ''}
+        <h3 style="margin-top:14px">Top fixes</h3><ul>${(d.top_fixes||[]).map(f => `<li>${esc(f)}</li>`).join('')}</ul>`);
+    } else if (job === 'keywords') {
+      card('ATS keywords', `
+        <h3>Coverage <span class="score ${scoreCls(d.coverage_score,100)}">${d.coverage_score}/100</span></h3>
+        <h3 style="margin-top:10px">Missing high-value</h3><ul>${(d.missing_high_value||[]).map(k => `<li>${esc(k)}</li>`).join('') || '<li>none</li>'}</ul>
+        <h3 style="margin-top:10px">Suggested insertions</h3>
+        <ul>${(d.insertions||[]).map(i => `<li><strong>${esc(i.keyword)}</strong> → ${esc(i.section)}: ${esc(i.suggestion)}</li>`).join('') || '<li>none</li>'}</ul>
+        ${(d.stuffing_warnings||[]).length ? `<h3 style="margin-top:10px">Stuffing warnings</h3><ul>${d.stuffing_warnings.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : ''}`);
+    } else if (job === 'fresh') {
+      card('Freshness audit', `
+        <h3>${esc(d.verdict)}</h3>
+        <h3 style="margin-top:10px">Not on the site yet</h3>
+        <ul>${(d.new_candidates||[]).map(c => `<li><strong>${esc(c.title)}</strong> (${esc(c.suggested_placement)}) — ${esc(c.evidence)}<br>
+          draft: <em>${esc(c.draft && (c.draft.title + ' — ' + c.draft.note))}</em></li>`).join('') || '<li>nothing new</li>'}</ul>
+        <h3 style="margin-top:10px">Possibly stale</h3>
+        <ul>${(d.stale||[]).map(s => `<li><strong>${esc(s.title)}</strong> — ${esc(s.why)}</li>`).join('') || '<li>none</li>'}</ul>`);
+    }
+  } catch (e) { wait.remove(); card(job + ' — error', `<p>${esc(e.message)}</p>`); }
+  btn.disabled = false;
+}
+document.querySelectorAll('#actions button').forEach(b =>
+  b.addEventListener('click', () => runJob(b, b.dataset.job)));
+
+$('#variants').addEventListener('click', async () => {
+  const ta = $('#ta');
+  const sel = ta.value.substring(ta.selectionStart, ta.selectionEnd).trim();
+  if (!sel) { card('Variants', '<p>Select some text in the editor first.</p>'); return; }
+  const btn = $('#variants'); btn.disabled = true;
+  const wait = card('Variants', '<p><span class="spin">◌</span> rewriting…</p>');
+  try {
+    const d = await api('/api/variants', { text: sel, context: $('#file').value });
+    wait.remove();
+    const c = card('Variants — click one to replace the selection', `
+      ${d.variants.map(v => `<div class="variant" data-text="${esc(v.text)}"><span class="k">${esc(v.style)}${d.recommendation===v.style?' · recommended':''}</span><p>${esc(v.text)}</p></div>`).join('')}
+      <p style="margin-top:8px"><em>${esc(d.why)}</em></p>`);
+    c.querySelectorAll('.variant').forEach(v => v.addEventListener('click', () => {
+      const t = v.dataset.text;
+      ta.setRangeText(t, ta.selectionStart, ta.selectionEnd, 'select');
+      card('Variants', '<p>Replaced in editor — remember to Save.</p>');
+    }));
+  } catch (e) { wait.remove(); card('Variants — error', `<p>${esc(e.message)}</p>`); }
+  btn.disabled = false;
+});
+
+async function sendChat() {
+  const t = $('#chatin').value.trim();
+  if (!t) return;
+  $('#chatin').value = '';
+  chat.push({ role: 'user', text: t });
+  card('You', `<p>${esc(t)}</p>`);
+  const wait = card('Critic', '<p><span class="spin">◌</span></p>');
+  try {
+    const d = await api('/api/chat', { messages: chat });
+    chat.push({ role: 'assistant', text: d.reply });
+    wait.remove();
+    card('Critic', `<p>${esc(d.reply)}</p>`);
+  } catch (e) { wait.remove(); card('Critic — error', `<p>${esc(e.message)}</p>`); }
+}
+$('#send').addEventListener('click', sendChat);
+$('#chatin').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+});
+
+$('#publish').addEventListener('click', async () => {
+  const btn = $('#publish'); btn.disabled = true;
+  const wait = card('Publish', '<p><span class="spin">◌</span> build → sanitize gate → push…</p>');
+  try {
+    const d = await api('/api/publish', {});
+    wait.remove();
+    card('Publish', `<h3>Live ✓ ${d.committed ? '(content committed)' : '(no content changes, redeployed)'}</h3>
+      <p style="font-family:var(--mono);font-size:11px;white-space:pre-wrap;max-height:200px;overflow:auto">${esc(d.log)}</p>`);
+    refreshStatus();
+  } catch (e) { wait.remove(); card('Publish — BLOCKED', `<p>${esc(e.message)}</p><p>If the sanitize gate failed, fix the flagged text and retry.</p>`); }
+  btn.disabled = false;
+});
+
+loadContent(); refreshStatus();
+</script>
+</body>
+</html>
