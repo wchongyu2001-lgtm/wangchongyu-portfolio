@@ -1,0 +1,24 @@
+{
+  "note": "ATS keyword bank the studio's optimizer checks copy against. Grouped by target role. Edit freely.",
+  "roles": {
+    "asset_management": [
+      "asset management", "portfolio management", "equity research", "investment research",
+      "valuation", "DCF", "comparable company analysis", "financial modelling",
+      "risk management", "due diligence", "investment thesis", "backtesting", "WRDS"
+    ],
+    "fund_distribution": [
+      "fund distribution", "investor relations", "capital raising", "LP database",
+      "fund due diligence", "tearsheet", "alternative assets", "private equity",
+      "hedge fund", "manager selection", "CRM", "client coverage"
+    ],
+    "consulting_strategy": [
+      "strategy", "structured problem-solving", "stakeholder management", "process automation",
+      "workflow optimisation", "data analysis", "market research", "client management",
+      "cross-functional", "operational efficiency"
+    ],
+    "ai_leverage": [
+      "LLM", "AI automation", "agentic workflows", "Claude Code", "MCP",
+      "prompt engineering", "Python", "API integration", "multi-agent systems", "CI/CD"
+    ]
+  }
+}

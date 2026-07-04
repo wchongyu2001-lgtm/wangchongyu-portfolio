@@ -1,0 +1,24 @@
+{
+  "note": "Verified results ledger. The critic judges site copy against THIS — any site claim not traceable to a fact here gets flagged as unverified. Add new facts only when real.",
+  "facts": [
+    { "id": "conduit-tearsheets", "fact": "Shipped 34 manager- and sub-fund-level tearsheets at Conduit Group", "source": "resume / internship work product" },
+    { "id": "conduit-managers", "fact": "Processed ~17 fund managers across 8 alternative-asset sectors (hedge fund, PE, real estate, VC, quant, debt, digital assets)", "source": "resume" },
+    { "id": "conduit-workbook", "fact": "Built LLM extraction + 7-factor scoring pipeline producing a 14-section fund due-diligence workbook with composite rating and A/B/C/Pass shelf verdict", "source": "resume" },
+    { "id": "conduit-lp-db", "fact": "Shipped v2.0 of a 5,146-contact LP database with LLM-driven Tier 1/2/3 prospect matching, queryable in natural language", "source": "resume" },
+    { "id": "smile-placements", "fact": "50+ S Pass and Work Permit placements within first 8 months of founding Smile Employment Agency (UEN 24C2161)", "source": "resume / MOM records" },
+    { "id": "smile-clients", "fact": "20+ corporate partners at 90% retention; placements completed within 10 working days", "source": "resume" },
+    { "id": "commerce-revenue", "fact": "Campaigns generated US$100,000+ in attributed client revenue at Commerce.sg", "source": "resume" },
+    { "id": "spa-tiktok", "fact": "Produced short-form videos reaching 100K+ organic TikTok views at New V Spa", "source": "resume" },
+    { "id": "gpa", "fact": "Cumulative GPA 3.7/4.0, SMU BBM Finance & Strategy double major, class of 2027", "source": "transcript" },
+    { "id": "ocsp", "fact": "Lead a 24-member SMU overseas community service project team (CRIBS Foundation, Philippines)", "source": "resume" },
+    { "id": "ai-systems", "fact": "~20 AI systems built and running (personal + business), incl. 30+ custom agent skills and ~60 registered agents/automations on a self-hosted hub", "source": "project inventory / Desk registry" },
+    { "id": "wang-desk", "fact": "Wang Desk: 7 role-based agent skills produce dated investment memos on schedule; DCF+comps valuation engine; WRDS deep-history data backfill; lookahead-safe backtester with walk-forward OOS; runs on personal capital with NO published track record", "source": "Markets repo" },
+    { "id": "house-finder", "fact": "House Finder sent 100+ autonomous housing enquiries (direct emails + browser form-fill) with an LLM reply-brain and approval queue", "source": "house-finder logs" },
+    { "id": "postroom", "fact": "Post Room: custom multi-account Gmail MCP server + headless LLM workers produce a daily inbox brief (digests, deadlines, finance concept ledger with spaced repetition)", "source": "gmail-mcp repo" }
+  ],
+  "never_claim": [
+    "Investment returns, AUM, or track record for Wang Desk (personal capital, unaudited)",
+    "Client or worker names, NRICs, internal URLs/IPs",
+    "Anything not in the facts list above"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "note": "What recruiters for the target roles actually ask for and search. Compiled 2026-07 from live job postings + recruiter guidance. The critic judges relevance against THIS, not against generic taste. Refresh occasionally.",
+  "sources": [
+    "JPMorgan 2026 Asset Management Summer Internship (Singapore) posting",
+    "UBS 2026 Summer Internship — Asset Management (Singapore) posting",
+    "IR/distribution intern JDs (growth equity / private markets, Dartmouth Partners, CFI)",
+    "Resume Worded / finance-intern resume keyword guidance 2026"
+  ],
+  "what_postings_ask_for": {
+    "asset_management": [
+      "strong interest in finance and asset management", "logical thinking and quantitative skills",
+      "attention to detail", "teamwork and collaboration", "ability to handle pressure",
+      "numeracy", "strategic thinking", "strong communication skills"
+    ],
+    "fund_distribution_ir": [
+      "LP relationship management", "due diligence questionnaires (DDQs)",
+      "pitch books and investor presentations", "data rooms and fund documentation",
+      "portfolio reports", "fundraising research", "financial statement literacy",
+      "constructing a narrative around investment strategies"
+    ],
+    "evidence_recruiters_reward": [
+      "quantified results in dollars and percentages",
+      "hands-on exposure to financial tools and real data (even academic projects)",
+      "Excel modelling, financial statement analysis",
+      "relevant coursework and specialisation named explicitly",
+      "tools scannable at a glance"
+    ]
+  },
+  "linkedin_search_terms": [
+    "Asset Management", "Financial Analysis", "Corporate Finance", "Equity Research",
+    "Investor Relations", "Fund Distribution", "Private Markets", "Due Diligence",
+    "Valuation", "Excel", "Python", "SMU", "Singapore"
+  ],
+  "recruiter_fears_to_preempt": [
+    "'Will code, not analyze markets' — AI projects must read as finance leverage, not software engineering",
+    "Self-invented titles that don't map to any job req",
+    "Unverifiable claims (personal 'fund' with no track record framed as investing skill)",
+    "Breadth without depth — 20 projects can read as unfocused"
+  ]
+}
