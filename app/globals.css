@@ -521,7 +521,7 @@ button:focus-visible {
 /* ---------- sections ---------- */
 
 .section {
-  padding: 104px 0 0;
+  padding-top: 104px;
 }
 
 .section-head {
@@ -855,6 +855,8 @@ button:focus-visible {
   border-top: 1px solid #3a3830;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -885,7 +887,8 @@ button:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
   gap: 64px;
-  padding: 56px 0 96px;
+  padding-top: 56px;
+  padding-bottom: 96px;
 }
 
 .detail-body h2 {
@@ -1061,9 +1064,33 @@ button:focus-visible {
   }
 }
 
+@media (max-width: 900px) {
+  .section-head {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .section-head .kicker.dim {
+    display: none;
+  }
+}
+
 @media (max-width: 520px) {
   .stats-grid,
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+  .hero .kicker-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .case-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .case-num {
+    padding-top: 0;
+  }
+  .contact h2 {
+    font-size: clamp(52px, 17vw, 72px);
   }
 }
