@@ -52,6 +52,11 @@
   .variant{border-left:2px solid var(--line);padding:8px 12px;margin:8px 0;cursor:pointer}
   .variant:hover{border-color:var(--accent);background:var(--accent-soft)}
   .variant .k{margin-bottom:4px}
+  pre.diff{font-family:var(--mono);font-size:11.5px;line-height:1.5;white-space:pre-wrap;
+    background:var(--paper-2);border:1px solid var(--line);border-radius:2px;padding:12px;
+    max-height:280px;overflow:auto;margin:8px 0}
+  pre.diff .add{color:var(--accent)} pre.diff .del{color:var(--bad)}
+  .card .btnrow{display:flex;gap:8px;margin-top:10px}
   #chatbar{display:flex;gap:8px;padding:14px 20px;border-top:1px solid var(--line)}
   #chatbar textarea{flex:1;font-family:var(--text);font-size:14px;padding:9px 12px;
     border:1px solid var(--line);border-radius:2px;background:#fff;resize:none;height:42px}
@@ -92,8 +97,9 @@
         before anything goes live.</p></div>
     </div>
     <div id="chatbar">
-      <textarea id="chatin" placeholder="Ask the critic anything… (Enter to send)"></textarea>
-      <button id="send">Send</button>
+      <textarea id="chatin" placeholder="Ask the critic — or describe a change and hit ✎ Edit site"></textarea>
+      <button id="send">Ask</button>
+      <button id="edit" class="primary">✎ Edit site</button>
     </div>
   </section>
   <section id="editor">
@@ -234,6 +240,50 @@ $('#send').addEventListener('click', sendChat);
 $('#chatin').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
 });
+
+function renderDiff(text) {
+  return text.split('\n').map(l => {
+    const cls = l.startsWith('+') ? 'add' : l.startsWith('-') ? 'del' : '';
+    return cls ? `<span class="${cls}">${esc(l)}</span>` : esc(l);
+  }).join('\n');
+}
+
+async function sendEdit() {
+  const t = $('#chatin').value.trim();
+  if (!t) { card('Edit', '<p>Describe the change first, then hit ✎ Edit site.</p>'); return; }
+  $('#chatin').value = '';
+  card('You — edit request', `<p>${esc(t)}</p>`);
+  const btn = $('#edit'); btn.disabled = true;
+  const wait = card('Editor', '<p><span class="spin">◌</span> drafting the change… (30–90s)</p>');
+  try {
+    const d = await api('/api/edit', { instruction: t });
+    wait.remove();
+    const c = card('Proposed change — review the diff', `
+      <h3>${esc(d.note)}</h3>
+      ${d.changes.map(ch => `<p class="k" style="margin-top:10px">${esc(ch.file)}</p><pre class="diff">${renderDiff(ch.diff)}</pre>`).join('')}
+      <div class="btnrow">
+        <button class="primary" data-apply="${d.id}">Apply</button>
+        <button data-discard="1">Discard</button>
+      </div>`);
+    c.querySelector('[data-apply]').addEventListener('click', async (ev) => {
+      ev.target.disabled = true;
+      try {
+        const r = await api('/api/apply', { id: d.id });
+        const ac = card('Applied ✓', `<p>Updated: ${r.applied.join(', ')}. Reloading editor… hit <strong>Publish site</strong> when ready, or Undo.</p>
+          <div class="btnrow"><button data-undo="1">Undo</button></div>`);
+        ac.querySelector('[data-undo]').addEventListener('click', async (uv) => {
+          uv.target.disabled = true;
+          try { const u = await api('/api/undo', {}); card('Undone', `<p>Restored: ${u.restored.join(', ')}</p>`); loadContent(); refreshStatus(); }
+          catch (e) { card('Undo — error', `<p>${esc(e.message)}</p>`); }
+        });
+        loadContent(); refreshStatus();
+      } catch (e) { card('Apply — error', `<p>${esc(e.message)}</p>`); }
+    });
+    c.querySelector('[data-discard]').addEventListener('click', () => c.remove());
+  } catch (e) { wait.remove(); card('Editor — error', `<p>${esc(e.message)}</p>`); }
+  btn.disabled = false;
+}
+$('#edit').addEventListener('click', sendEdit);
 
 $('#publish').addEventListener('click', async () => {
   const btn = $('#publish'); btn.disabled = true;

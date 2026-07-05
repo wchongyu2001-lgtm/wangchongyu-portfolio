@@ -5,15 +5,19 @@ Stdlib-only HTTP server (Post Room pattern). Every smart feature shells out to
 headless Claude (`claude -p`, subscription) and parses JSON from stdout.
 Binds 127.0.0.1 only — never expose. Publish = build + sanitize gate + git push.
 """
+import difflib
 import json
 import os
 import re
 import shutil
 import subprocess
 import time
+import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# launchd starts us with a bare PATH — make sure homebrew (npm) and ~/.local/bin are on it
+os.environ['PATH'] = '/opt/homebrew/bin:/usr/local/bin:' + os.environ.get('PATH', '/usr/bin:/bin')
 CONTENT = os.path.join(BASE, 'content')
 CLAUDE = os.path.expanduser('~/.local/bin/claude')
 PORT = 8786
@@ -232,6 +236,88 @@ ASSISTANT:"""
     return ask_claude(prompt)
 
 
+PENDING = {}   # proposal id -> {'changes': [{'file', 'content'}], 'note'}
+LAST_APPLIED = []  # files touched by the most recent apply (for undo)
+
+
+def dumps_content(obj):
+    return json.dumps(obj, indent=2, ensure_ascii=False) + '\n'
+
+
+def job_edit(instruction):
+    """Turn a plain-English instruction into proposed content-file edits + diffs."""
+    prompt = f"""You are the content editor for the owner's portfolio site. {AUDIENCE}
+
+The owner wants this change:
+\"\"\"{instruction}\"\"\"
+
+Below are the current content files, the verified facts ledger, and the market signal.
+Rules:
+- Only claim what the facts ledger backs; never invent numbers or results.
+- Sanitize: no client/worker names, no internal IPs/URLs/ports, no phone numbers.
+- Keep the existing voice: concrete, impact-first, no hype adjectives.
+- Touch ONLY the files that need changing. Return each changed file IN FULL.
+- Preserve each file's existing JSON structure exactly (same keys/shape).
+
+Reply with ONLY this JSON:
+{{"changes": [{{"file": "<one of: {', '.join(CONTENT_FILES)}>", "content": <the complete new JSON value for that file>}}],
+ "note": "<one sentence on what you changed and why>"}}
+
+{grounding_text()}
+
+CONTENT:
+{all_content_text()}"""
+    result = extract_json(ask_claude(prompt, timeout=300))
+    changes = []
+    for ch in result.get('changes', []):
+        name = ch['file']
+        if name not in CONTENT_FILES:
+            raise ValueError(f'unknown file: {name}')
+        new_text = dumps_content(ch['content'])
+        old_text = open(os.path.join(CONTENT, name)).read()
+        diff = ''.join(difflib.unified_diff(
+            old_text.splitlines(keepends=True), new_text.splitlines(keepends=True),
+            fromfile=name, tofile=name + ' (proposed)', n=2))
+        changes.append({'file': name, 'content': ch['content'],
+                        'diff': diff or '(no textual change)'})
+    if not changes:
+        raise ValueError('the editor proposed no changes: ' + result.get('note', ''))
+    pid = uuid.uuid4().hex[:8]
+    PENDING[pid] = {'changes': changes, 'note': result.get('note', '')}
+    return {'id': pid, 'note': result.get('note', ''),
+            'changes': [{'file': c['file'], 'diff': c['diff']} for c in changes]}
+
+
+def apply_proposal(pid):
+    global LAST_APPLIED
+    prop = PENDING.pop(pid, None)
+    if not prop:
+        raise ValueError('proposal expired or unknown — run the edit again')
+    touched = []
+    for ch in prop['changes']:
+        path = os.path.join(CONTENT, ch['file'])
+        shutil.copy(path, path + '.bak')
+        with open(path, 'w') as f:
+            f.write(dumps_content(ch['content']))
+        touched.append(ch['file'])
+    LAST_APPLIED = touched
+    return {'ok': True, 'applied': touched}
+
+
+def undo_last():
+    global LAST_APPLIED
+    restored = []
+    for name in LAST_APPLIED:
+        path = os.path.join(CONTENT, name)
+        if os.path.exists(path + '.bak'):
+            shutil.copy(path + '.bak', path)
+            restored.append(name)
+    LAST_APPLIED = []
+    if not restored:
+        raise ValueError('nothing to undo')
+    return {'ok': True, 'restored': restored}
+
+
 def job_publish():
     log = []
 
@@ -302,6 +388,12 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, job_freshness())
             elif self.path == '/api/chat':
                 self._send(200, {'reply': job_chat(body['messages'])})
+            elif self.path == '/api/edit':
+                self._send(200, job_edit(body['instruction']))
+            elif self.path == '/api/apply':
+                self._send(200, apply_proposal(body['id']))
+            elif self.path == '/api/undo':
+                self._send(200, undo_last())
             elif self.path == '/api/publish':
                 self._send(200, job_publish())
             else:
