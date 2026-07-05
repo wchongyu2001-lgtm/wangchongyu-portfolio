@@ -1,8 +1,30 @@
 [
-  { "title": "Deep-research harness", "note": "Parallel search agents with adversarial claim verification and cited reports" },
-  { "title": "Personal Learnings", "note": "Auto-published dashboard of every research dossier I keep, with spaced-repetition review" },
-  { "title": "AI Build Studio", "note": "Local two-pane app that plans software in chat and kicks off coding sessions" },
-  { "title": "Clawdmeter", "note": "Token-usage telemetry pipeline for my AI fleet" },
-  { "title": "Kith", "note": "A warm, installable guestbook PWA for friends — production on Vercel" },
-  { "title": "Trips", "note": "Wanderlog-style itinerary planner with self-hosted cross-device sync" }
+  {
+    "title": "Deep-research harness",
+    "note": "Parallel search agents with adversarial claim verification and cited reports"
+  },
+  {
+    "title": "Personal Learnings",
+    "note": "Auto-published dashboard of every research dossier I keep, with spaced-repetition review"
+  },
+  {
+    "title": "AI Build Studio",
+    "note": "Local two-pane app that plans software in chat and kicks off coding sessions"
+  },
+  {
+    "title": "Portfolio Studio",
+    "note": "Local admin for this site: an LLM critic grades every claim against a verified facts ledger and live recruiter market signal, edits copy from plain-English instructions, and publishes through a sanitization gate"
+  },
+  {
+    "title": "Clawdmeter",
+    "note": "Token-usage telemetry pipeline for my AI fleet"
+  },
+  {
+    "title": "Kith",
+    "note": "A warm, installable guestbook PWA for friends — production on Vercel"
+  },
+  {
+    "title": "Trips",
+    "note": "Wanderlog-style itinerary planner with self-hosted cross-device sync"
+  }
 ]
